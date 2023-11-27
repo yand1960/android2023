@@ -10,7 +10,7 @@ class MainActivity3 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        setContentView(R.layout.activity_main3)
         val btn1 = findViewById<Button>(R.id.btn1)
         val txt1 = findViewById<TextView>(R.id.txt1)
         val edt1 = findViewById<EditText>(R.id.edt1)
