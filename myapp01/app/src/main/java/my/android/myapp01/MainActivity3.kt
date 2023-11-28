@@ -15,11 +15,11 @@ class MainActivity3 : AppCompatActivity() {
         val txt1 = findViewById<TextView>(R.id.txt1)
         val edt1 = findViewById<EditText>(R.id.edt1)
         btn1.setOnClickListener {
+            val greeting = resources.getString(R.string.greeting)
             val user = edt1.text;
-            btn1.text = "Hello, $user!"
-            txt1.text = "Hello, $user!"
+            btn1.text = "$greeting, $user!"
+            txt1.text = "$greeting, $user!"
             edt1.setText("$user - балда")
         }
-
     }
 }
