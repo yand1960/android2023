@@ -1,9 +1,14 @@
 package my.android.myapp02
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.snackbar.Snackbar
 
 class Calc1 : AppCompatActivity() {
 
@@ -17,22 +22,46 @@ class Calc1 : AppCompatActivity() {
         val plus = findViewById<Button>(R.id.plus)
         val minus = findViewById<Button>(R.id.minus)
         val memory = findViewById<Button>(R.id.memory)
+        val root = findViewById<ConstraintLayout>(R.id.root)
         plus.setOnClickListener {
             val num1 = x.text.toString()?.toDoubleOrNull()
             val num2 = y.text.toString()?.toDoubleOrNull()
             val result = if(num1 != null && num2 != null) num1 + num2 else null
             z.setText(result.toString())
         }
+        val num1 = intent.extras?.getDouble("x")
+        val num2 = intent.extras?.getDouble("y")
+        x.setText(num1?.toString())
+        y.setText(num2?.toString())
+
 
         minus.setOnClickListener {
-            val num1 = x.text.toString().toDouble()
-            val num2 = y.text.toString().toDouble()
-            val result = num1 - num2
-            z.setText(result.toString())
+            try {
+                val num1 = x.text.toString().toDouble()
+                val num2 = y.text.toString().toDouble()
+                val result = num1 - num2
+                z.setText(result.toString())
+            } catch(e: Exception) {
+                AlertDialog
+                    .Builder(this)
+                    .setMessage("Ты понял, что сделал не так?")
+                    .setTitle("ОШИБКА!")
+                    .setPositiveButton("ДА") { a, b -> this.title = "ДА" }
+                    .setNeutralButton("НЕ УВЕРЕН", { a, b -> this.title = "ОК" })
+                    .setNegativeButton("НЕТ", fun(a, b) {this.title = "НЕТ" })
+                    .show()
+            }
         }
 
         memory.setOnClickListener {
+            Toast
+                .makeText(this, "До того М=$M", Toast.LENGTH_LONG)
+                .show()
             M = z.text.toString()?.toDoubleOrNull()
+            Snackbar
+                .make(root,"После того M=$M", Snackbar.LENGTH_INDEFINITE)
+                .setAction("OK", {this.title = M.toString()})
+                .show()
         }
     }
 }
