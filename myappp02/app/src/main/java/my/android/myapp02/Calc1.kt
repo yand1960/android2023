@@ -4,11 +4,13 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.getSystemService
 import com.google.android.material.snackbar.Snackbar
 
 class Calc1 : AppCompatActivity() {
@@ -31,6 +33,7 @@ class Calc1 : AppCompatActivity() {
             val num2 = y.text.toString()?.toDoubleOrNull()
             val result = if(num1 != null && num2 != null) num1 + num2 else null
             z.setText(result.toString())
+            hideKeyBoard(x)
         }
 
         val num1 = intent.extras?.getDouble("x")
@@ -54,6 +57,7 @@ class Calc1 : AppCompatActivity() {
                     .setNegativeButton("НЕТ", fun(a, b) {this.title = "НЕТ" })
                     .show()
             }
+            hideKeyBoard(x)
         }
 
         memory.setOnClickListener {
@@ -66,5 +70,11 @@ class Calc1 : AppCompatActivity() {
                 .setAction("OK", {this.title = M.toString()})
                 .show()
         }
+    }
+
+    private fun hideKeyBoard(view: View) {
+
+        val imm = getSystemService(InputMethodManager::class.java)
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

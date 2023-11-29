@@ -22,4 +22,12 @@
         android:id="@+id/itemPhone"
         android:title="Позвонить" />
 
+    <item
+        android:id="@+id/itemSMS"
+        android:title="SMS" />
+
+    <item
+        android:id="@+id/itemSMS2"
+        android:title="SMS2" />
+
 </menu>

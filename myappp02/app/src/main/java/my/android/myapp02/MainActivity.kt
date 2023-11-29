@@ -1,12 +1,18 @@
 package my.android.myapp02
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,12 +40,41 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("y", 0.0)
             startActivity(intent)
         }
+
         if(item.title == "Позвонить") {
-            val intent = Intent(Intent.ACTION_CALL)
-            intent.setData(Uri.parse("tel:+71234567"))
-            startActivity(intent)
+            val p = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
+            if (p != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE),0 )
+            } else {
+                val intent = Intent(Intent.ACTION_CALL)
+                intent.setData(Uri.parse("tel:+71234567"))
+                startActivity(intent)
+            }
         }
 
+        if(item.title == "SMS") {
+            val p = ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS)
+            if (p != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.SEND_SMS),0 )
+            } else {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.setData(Uri.parse("sms:+71234567"))
+                startActivity(intent)
+            }
+        }
+
+        if(item.title == "SMS2") {
+            var smsManager: SmsManager
+            if (getSystemService(SmsManager::class.java) != null)
+                smsManager = getSystemService(SmsManager::class.java)
+            else
+                smsManager = SmsManager.getDefault()
+            smsManager.sendTextMessage("+71234568",null,"QWERTY!",null, null)
+
+            Toast
+                .makeText(this, "SMS Sent", Toast.LENGTH_LONG)
+                .show()
+        }
 
         return super.onOptionsItemSelected(item)
     }
