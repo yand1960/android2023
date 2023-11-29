@@ -1,6 +1,7 @@
 package my.android.myapp02
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -31,6 +32,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Calc1::class.java)
             intent.putExtra("x", 0.0)
             intent.putExtra("y", 0.0)
+            startActivity(intent)
+        }
+        if(item.title == "Позвонить") {
+            val intent = Intent(Intent.ACTION_CALL)
+            intent.setData(Uri.parse("tel:+71234567"))
             startActivity(intent)
         }
 

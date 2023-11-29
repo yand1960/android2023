@@ -3,6 +3,7 @@ package my.android.myapp02
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -15,25 +16,27 @@ class Calc1 : AppCompatActivity() {
     var M: Double? = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calc1)
+//        setContentView(R.layout.activity_calc1)
+        setContentView(R.layout.activity_calc2)
         val x = findViewById<EditText>(R.id.num1)
         val y = findViewById<EditText>(R.id.num2)
         val z = findViewById<EditText>(R.id.result)
         val plus = findViewById<Button>(R.id.plus)
         val minus = findViewById<Button>(R.id.minus)
         val memory = findViewById<Button>(R.id.memory)
-        val root = findViewById<ConstraintLayout>(R.id.root)
+        val root = findViewById<View>(R.id.root)
+
         plus.setOnClickListener {
             val num1 = x.text.toString()?.toDoubleOrNull()
             val num2 = y.text.toString()?.toDoubleOrNull()
             val result = if(num1 != null && num2 != null) num1 + num2 else null
             z.setText(result.toString())
         }
+
         val num1 = intent.extras?.getDouble("x")
         val num2 = intent.extras?.getDouble("y")
         x.setText(num1?.toString())
         y.setText(num2?.toString())
-
 
         minus.setOnClickListener {
             try {

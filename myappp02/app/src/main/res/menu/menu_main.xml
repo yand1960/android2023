@@ -18,4 +18,8 @@
         android:id="@+id/itemCalc"
         android:title="Калькулятор" />
 
+    <item
+        android:id="@+id/itemPhone"
+        android:title="Позвонить" />
+
 </menu>
