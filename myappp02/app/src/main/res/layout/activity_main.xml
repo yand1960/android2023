@@ -16,4 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/person"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="155dp"
+        android:src="@drawable/karl_marx"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/history" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

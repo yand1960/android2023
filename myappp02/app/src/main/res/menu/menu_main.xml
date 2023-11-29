@@ -30,4 +30,18 @@
         android:id="@+id/itemSMS2"
         android:title="SMS2" />
 
+    <item
+        android:id="@+id/karl"
+        android:title="Karl" />
+    <item
+        android:id="@+id/naomi"
+        android:title="Naomi" />
+    <item
+        android:id="@+id/paris"
+        android:title="Paris" />
+
+    <item
+        android:id="@+id/oval"
+        android:title="Oval" />
+
 </menu>

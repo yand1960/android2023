@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.telephony.SmsManager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val receiver: BroadcastReceiver = CalcReceiver()
         val filter = IntentFilter()
         filter.addAction("my.android.myapp02.CALC_INTENT")
@@ -90,6 +90,26 @@ class MainActivity : AppCompatActivity() {
             Toast
                 .makeText(this, "SMS Sent", Toast.LENGTH_LONG)
                 .show()
+        }
+
+        if (item.title == "Karl") {
+            val person = findViewById<ImageView>(R.id.person)
+            person.setImageResource(R.drawable.karl_marx)
+        }
+
+        if (item.title == "Naomi") {
+            val person = findViewById<ImageView>(R.id.person)
+            person.setImageResource(R.drawable.naomi_campbell)
+        }
+
+        if (item.title == "Paris") {
+            val person = findViewById<ImageView>(R.id.person)
+            person.setImageResource(R.drawable.paris_hilton)
+        }
+
+        if (item.title == "Oval") {
+            val person = findViewById<ImageView>(R.id.person)
+            person.setImageResource(R.drawable.oval)
         }
 
         return super.onOptionsItemSelected(item)
