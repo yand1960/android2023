@@ -1,5 +1,6 @@
 package my.android.myapp02
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +11,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.getSystemService
 import com.google.android.material.snackbar.Snackbar
 
 class Calc1 : AppCompatActivity() {
@@ -34,6 +34,7 @@ class Calc1 : AppCompatActivity() {
             val result = if(num1 != null && num2 != null) num1 + num2 else null
             z.setText(result.toString())
             hideKeyBoard(x)
+            sendCalcBroadcast("$num1+$num2=$result")
         }
 
         val num1 = intent.extras?.getDouble("x")
@@ -73,8 +74,14 @@ class Calc1 : AppCompatActivity() {
     }
 
     private fun hideKeyBoard(view: View) {
-
         val imm = getSystemService(InputMethodManager::class.java)
         imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun sendCalcBroadcast(message: String) {
+        val intent = Intent()
+        intent.action = "my.android.myapp02.CALC_INTENT"
+        intent.putExtra("message", message)
+        sendBroadcast(intent)
     }
 }
