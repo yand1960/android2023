@@ -1,0 +1,17 @@
+[
+    {
+        "firstName": "Yuri",
+        "lastName": "Andrienko",
+        "salary": 99999
+    },
+    {
+        "firstName": "Liza",
+        "lastName": "Lizyakina",
+        "salary": 88888
+    },
+    {
+        "firstName": "Vasya",
+        "lastName": "Pupkin",
+        "salary": 77777
+    }
+]
