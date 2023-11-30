@@ -105,3 +105,31 @@ class RepositoryFile(val context: Context) : Repository {
             return  emps.toList()
         }
 }
+
+class RepositoryDB(val context: Context) : Repository {
+    init {
+        if (!context.getDatabasePath("Emps").exists()) {
+            val db = context.openOrCreateDatabase("Emps", Context.MODE_PRIVATE, null)
+            var sql =
+                "CREATE TABLE IF NOT EXISTS people(firstName VARCHAR, lastName VARCHAR, salary Float)"
+            db.execSQL(sql)
+            sql =
+                "INSERT INTO people(firstName, lastName, salary) VALUES ('Yuri', 'Yurkov', 123456.0)"
+            db.execSQL(sql)
+        }
+    }
+    override var employees: List<Employee> = ArrayList<Employee>()
+
+        get() {
+            val emps =  ArrayList<Employee>()
+            val db = context.openOrCreateDatabase("Emps", Context.MODE_PRIVATE, null)
+            val sql = "SELECT * FROM people"
+            val cursor = db.rawQuery(sql,null)
+            cursor.moveToFirst()
+            while(!cursor.isAfterLast) {
+                emps.add(Employee(cursor.getString(0),cursor.getString(1), cursor.getDouble(2)))
+                cursor.moveToNext()
+            }
+            return  emps
+        }
+}
