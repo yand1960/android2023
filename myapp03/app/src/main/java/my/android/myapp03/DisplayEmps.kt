@@ -23,9 +23,9 @@ class DisplayEmps : AppCompatActivity() {
         val handler = Handler(Looper.getMainLooper())
         Thread {
 //            val emps = RepositoryWebService(this).employees
-//            val emps = RepositoryCBR(this).employees
+            val emps = RepositoryCBR(this).employees
 //            val emps = RepositoryAsset(this).employees
-            val emps = RepositoryFile(this).employees
+//            val emps = RepositoryFile(this).employees
 //            val emps = RepositoryDB(this).employees
             handler.post {
                 renderEmps(emps)
