@@ -19,5 +19,6 @@ class Activity1 : AppCompatActivity() {
             val intent = Intent(this, Activity2::class.java)
             startActivity(intent)
         }
+
     }
 }
