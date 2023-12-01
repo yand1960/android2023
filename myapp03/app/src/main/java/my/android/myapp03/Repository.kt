@@ -25,7 +25,7 @@ class RepositoryStub() : Repository {
         }
 }
 
-class RepositoryWebService(context: Context) : Repository {
+class RepositoryWebService(val context: Context) : Repository {
     override var employees: List<Employee> = ArrayList<Employee>()
         get() {
             val url = URL("http://yand.dyndns.org/api/employees.aspx")
